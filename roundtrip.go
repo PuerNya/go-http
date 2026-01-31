@@ -1,0 +1,23 @@
+// Copyright 2018 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+//go:build !js
+
+package http
+
+import "net/http"
+
+// RoundTrip implements the [roundtripper] interface.
+//
+// For higher-level HTTP client support (such as handling of cookies
+// and redirects), see [Get], [Post], and the [Client] type.
+//
+// Like the RoundTripper interface, the error types returned
+// by RoundTrip are unspecified.
+func (t *Transport) RoundTrip(req *http.Request) (*http.Response, error) {
+	if t == nil {
+		panic("transport is nil")
+	}
+	return t.roundTrip(req)
+}
